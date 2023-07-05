@@ -1,0 +1,47 @@
+
+
+
+<section class="sto">
+<div class="container">
+ <div class="row justify-content-center">
+    <div class="col-md-7 col-lg-5">
+        <div class="login-wrap p-4 p-md-5">
+            <h3 class="text-center mb-4 text-black-50">Login</h3>
+            <form class="login-form" [formGroup]="loginForm" >
+                <div class="form-group" >
+                <input type="text" formControlName="email" name="email"  id="email" class="form-control rounded-left" placeholder="Username" >
+                <div class="text-danger error-message">
+                    <small  *ngIf="loginForm.controls['email'].errors?.required && isSubmitted">Please enter email.</small>
+                    <small  *ngIf="loginForm.controls['email'].errors?.pattern && isSubmitted">Please enter valid email</small>
+                </div>
+                </div>
+                <div class="form-group ">
+                    <input type="password" formControlName="password" class="form-control rounded-left" placeholder="Password" >
+                    <div class="text-danger error-message">
+                        <small  *ngIf="loginForm.controls['password'].errors && isSubmitted">Please enter valid password.</small>
+                    </div>
+                </div>
+               
+                <div class="w-50 mb-2">
+                    <label  class="checkbox-wrap checkbox-primary" for="rememberme">Remember Me
+                        <input type="checkbox" formControlName="rememberme" checked="">
+                        </label>
+                </div>
+                <div class="form-group">
+                <button type="submit" class="form-control btn btn-primary rounded submit px-3" (click)="LogIn()">Login</button>
+                </div>
+                <div class="form-group d-md-flex">
+                  
+                    <div class="w-50 text-md-right " id="ds">
+                        <a href="auth/reset">Forgot Password?</a>
+                    </div>
+                </div>
+              
+            </form>
+        </div>
+    </div>
+ </div>
+</div>
+</section> 
+<p-toast></p-toast>
+

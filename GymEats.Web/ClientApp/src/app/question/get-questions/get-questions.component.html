@@ -1,0 +1,87 @@
+<div class="card">
+    <p-toolbar>
+        <div class="p-toolbar-group-start">
+            <h3 class="ng-star-inserted">Questions</h3>
+        </div>
+        <div class="p-toolbar-group-end">
+            <button pButton pRipple label="Add" class="p-button-success" icon="pi pi-plus" (click)="showModal()"></button>
+        </div>
+    </p-toolbar>
+</div>
+<p-table [value]="question" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5, 10, 20]">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width:25%">Label</th>
+            <th style="width:25%">Isprimary</th>
+            <th style="width:25%">Createdon</th>
+            <th style="width:25%">Action</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+        <tr>
+            <td>{{ item.label }}</td>
+            <td>{{ item.isPrimary }}</td>
+            <td>{{ item.createdOn }}</td>
+            <td>
+                <a role="button" ><i class="pi pi-pencil text-black-50"
+                        style="font-size: 1.5rem;" (click)="openUdateModal(item.id)"></i></a>&nbsp;
+                <a role="button" (click)="confirm($event,item.id)"><i class="pi pi-trash text-black-50"
+                        style="font-size: 1.5rem"></i></a>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <p-confirmPopup></p-confirmPopup>
+</p-table>
+
+<!-- Add Modal -->
+<p-dialog header="Question" [(visible)]="visible" [style]="{width: '30vw'}">
+    <form  [formGroup]="addForm" >
+        <div class="form-group">
+            <label for="Label">Label</label>
+            <input type="text" formControlName="label" name="label" id="Label" class="form-control rounded-left"
+                placeholder="Enter Label">
+           
+        </div>
+        <div class="w-50 mb-2">
+            <input type="checkbox" formControlName="isPrimary" checked="">&nbsp;
+            <label class="checkbox-wrap checkbox-primary" for="isPrimary">IsPrimary
+            </label>
+        </div>
+        <div class="justify-content-center">
+            <button type="submit" class=" btn btn-primary  submit px-3" (click)="addQuestion()">Save</button>
+        </div>
+    </form>
+</p-dialog> 
+
+<!-- Edit Modal  -->
+<p-dialog header="Question" [(visible)]="isVisible" [style]="{width: '30vw'}">
+    <form  [formGroup]="updateForm">
+        <div class="form-group">
+            <label for="label">Label</label>
+            <input type="text" formControlName="label" name="label" id="label" class="form-control rounded-left"
+                placeholder="Enter Label"
+            >
+            <div class="text-danger error-message">
+                <small  *ngIf="updateForm.controls['label'].errors?.required && isSubmit">Please enter email.</small>
+            </div>
+        </div>
+        <div class="w-50 mb-2">
+            <input type="checkbox" formControlName="isPrimary">&nbsp;
+            <label class="checkbox-wrap checkbox-primary" for="isPrimary">IsPrimary
+            </label>
+        </div>
+        <div class="justify-content-center">
+            <button type="submit" class=" btn btn-primary  submit px-3" (click)="updateQuestion()">Save</button>
+        </div>
+    </form>
+</p-dialog> 
+
+<p-toast></p-toast>

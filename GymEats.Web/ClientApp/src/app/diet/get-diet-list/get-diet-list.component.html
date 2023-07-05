@@ -1,0 +1,102 @@
+<div class="card">
+    <p-toolbar>
+        <div class="p-toolbar-group-start">
+            <h3 class="ng-star-inserted">Diet-List</h3>
+        </div>
+        <div class="p-toolbar-group-end">
+            <button pButton pRipple label="Add" class="p-button-success" icon="pi pi-plus"></button>
+        </div>
+    </p-toolbar>
+</div>
+<p-table
+    [value]="diet"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[10, 25, 50]"
+>
+    <ng-template pTemplate="header">
+        <tr>
+            <th >Diet Name</th>
+            <th >Protein Percentage</th>
+            <th >Carbs Percentage</th>
+            <th >Fat Percentage</th>
+            <th >IsDefault</th>
+            <th >SurPlus Percentage</th>
+            <th >Deficit Percentage</th>
+            <th >Meal Schedule</th>
+            <th>Action</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+        <tr>
+            <td>{{ item.dietName }}</td>
+            <td>{{ item.proteinPercentage }}</td>
+            <td>{{ item.carbsPercentage }}</td>
+            <td>{{ item.fatPercentage }}</td>
+            <td>{{item.isDefault}}</td>
+            <td>{{item.surplusPercentage}}</td>
+            <td>{{item.deficitPercentage}}</td>
+            <td>{{item.mealSchedule}}</td>
+            <td>
+                <a role="button" ><i class="pi pi-pencil text-black-50"
+                    style="font-size: 1.5rem;" ></i></a>&nbsp;
+            <a role="button" ><i class="pi pi-trash text-black-50"
+                    style="font-size: 1.5rem;"></i></a>
+            </td>
+        </tr>
+    </ng-template>
+    
+</p-table>
+
+
+<!-- Add-Diet-Modal
+<p-dialog header="Question" [(visible)]="visible" [style]="{width: '60vw'}">
+    <form  >
+        <div class="form-group">
+            <label for="dietName">Diet Name</label>
+            <input type="text" formControlName="dietName" name="dietName" id="dietName" class="form-control rounded-left"
+                placeholder="Enter Diet name">
+        </div>
+        <div class="form-group">
+            <label for="proteinPercentage">Protein Percentage</label>
+            <input type="number" formControlName="proteinPercentage" name="proteinPercentage" id="proteinPercentage" class="form-control rounded-left"
+                placeholder="Enter protein percentage">
+        </div>
+        <div class="form-group">
+            <label for="carbsPercentage">Carbs Percentage</label>
+            <input type="number" formControlName="carbsPercentage" name="carbsPercentage" id="carbsPercentage" class="form-control rounded-left"
+                placeholder="Enter carbs percentage">
+        </div>
+        <div class="form-group">
+            <label for="fatPercentage">Fat Percentage</label>
+            <input type="number" formControlName="fatPercentage" name="fatPercentage" id="fatPercentage" class="form-control rounded-left"
+                placeholder="Enter fat percentage">
+        </div>
+        <div class="form-group">
+            <label for="surplusPercentage">Sur Plus Percentage</label>
+            <input type="number" formControlName="surplusPercentage" name="surplusPercentage" id="surplusPercentage" class="form-control rounded-left"
+                placeholder="Enter surplus percentage">
+        </div>
+        <div class="form-group">
+            <label for="deficitPercentage">Deficit Percentage</label>
+            <input type="number" formControlName="deficitPercentage" name="deficitPercentage" id="deficitPercentage" class="form-control rounded-left"
+                placeholder="Enter deficit percentage">
+        </div>
+        <div class="form-group">
+            <label for="mealSchedule">Meal Schedule</label>
+            <input type="number" formControlName="mealSchedule" name="mealSchedule" id="mealSchedule" class="form-control rounded-left"
+                placeholder="Enter meal schedule">
+        </div>
+        <div class="w-50 mb-2">
+            <input type="checkbox" formControlName="isPrimary" checked="">&nbsp;
+            <label class="checkbox-wrap checkbox-primary" for="isPrimary">IsPrimary
+            </label>
+        </div>
+        <div class="justify-content-center">
+            <button type="submit" class=" btn btn-primary  submit px-3" >Save</button>
+        </div>
+    </form>
+</p-dialog>  -->
