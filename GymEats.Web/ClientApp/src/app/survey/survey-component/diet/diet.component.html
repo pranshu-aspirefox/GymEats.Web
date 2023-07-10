@@ -1,0 +1,7 @@
+<div class="card">
+<div class="card-body">
+<select class="form-select" aria-label="Default select example" placeholder="--Select Question--">
+    <option  *ngfor="let diet of dietList" [value]="diet.id">{{diet.name}}</option>
+  </select>
+</div>
+</div>

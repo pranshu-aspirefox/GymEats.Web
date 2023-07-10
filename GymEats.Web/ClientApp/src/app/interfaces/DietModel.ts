@@ -1,4 +1,4 @@
-export interface DietViewModel
+export interface AddNewDietModel
 {
       id:string,
       dietName: string,

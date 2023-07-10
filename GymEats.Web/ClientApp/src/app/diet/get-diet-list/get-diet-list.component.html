@@ -4,14 +4,14 @@
             <h3 class="ng-star-inserted">Diet-List</h3>
         </div>
         <div class="p-toolbar-group-end">
-            <button pButton pRipple label="Add" class="p-button-success" icon="pi pi-plus"></button>
+            <button pButton pRipple label="Add" class="p-button-success" icon="pi pi-plus" (click)="showModal()"></button>
         </div>
     </p-toolbar>
 </div>
 <p-table
     [value]="diet"
     [paginator]="true"
-    [rows]="5"
+    [rows]="10"
     [showCurrentPageReport]="true"
     [tableStyle]="{ 'min-width': '50rem' }"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -41,62 +41,168 @@
             <td>{{item.deficitPercentage}}</td>
             <td>{{item.mealSchedule}}</td>
             <td>
-                <a role="button" ><i class="pi pi-pencil text-black-50"
-                    style="font-size: 1.5rem;" ></i></a>&nbsp;
+                <!-- <a role="button" ><i class="pi pi-pencil text-black-50"
+                    style="font-size: 1.5rem;" (click)="openUpdateModal(item.id)"></i></a>&nbsp;
             <a role="button" ><i class="pi pi-trash text-black-50"
-                    style="font-size: 1.5rem;"></i></a>
+                    style="font-size: 1.5rem;"></i></a> -->
+                <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-success" (click)="openUpdateModal(item.id)"></p-button>
+                <p-button icon="pi pi-trash" styleClass="p-button-rounded p-button-danger" (click)="confirm1(item.id)"></p-button> 
             </td>
         </tr>
     </ng-template>
     
 </p-table>
-
-
-<!-- Add-Diet-Modal
-<p-dialog header="Question" [(visible)]="visible" [style]="{width: '60vw'}">
-    <form  >
+ <!-- Add-Diet-Modal -->
+<p-dialog header="Add Diet" [(visible)]="visible" [style]="{ width: '40vw', height: 'auto' }">
+    <form  [formGroup]="addForm">
         <div class="form-group">
             <label for="dietName">Diet Name</label>
             <input type="text" formControlName="dietName" name="dietName" id="dietName" class="form-control rounded-left"
                 placeholder="Enter Diet name">
+        </div>
+        <div class="text-danger error-message">
+            <small  *ngIf="addForm.controls['dietName'].errors?.required && isSubmit">Please enter Diet name.</small>
         </div>
         <div class="form-group">
             <label for="proteinPercentage">Protein Percentage</label>
             <input type="number" formControlName="proteinPercentage" name="proteinPercentage" id="proteinPercentage" class="form-control rounded-left"
                 placeholder="Enter protein percentage">
         </div>
+        <div class="text-danger error-message">
+            <small  *ngIf="addForm.controls['proteinPercentage'].errors?.required && isSubmit">Please enter protein percentage.</small>
+        </div>
         <div class="form-group">
             <label for="carbsPercentage">Carbs Percentage</label>
             <input type="number" formControlName="carbsPercentage" name="carbsPercentage" id="carbsPercentage" class="form-control rounded-left"
                 placeholder="Enter carbs percentage">
+        </div>
+        <div class="text-danger error-message">
+            <small  *ngIf="addForm.controls['carbsPercentage'].errors?.required && isSubmit">Please enter Carbs percentage.</small>
         </div>
         <div class="form-group">
             <label for="fatPercentage">Fat Percentage</label>
             <input type="number" formControlName="fatPercentage" name="fatPercentage" id="fatPercentage" class="form-control rounded-left"
                 placeholder="Enter fat percentage">
         </div>
+        <div class="text-danger error-message">
+            <small  *ngIf="addForm.controls['fatPercentage'].errors?.required && isSubmit">Please enter fat percentage.</small>
+        </div>
         <div class="form-group">
             <label for="surplusPercentage">Sur Plus Percentage</label>
             <input type="number" formControlName="surplusPercentage" name="surplusPercentage" id="surplusPercentage" class="form-control rounded-left"
                 placeholder="Enter surplus percentage">
+        </div>
+        <div class="text-danger error-message">
+            <small  *ngIf="addForm.controls['surplusPercentage'].errors?.required && isSubmit">Please enter Surplus percentage.</small>
         </div>
         <div class="form-group">
             <label for="deficitPercentage">Deficit Percentage</label>
             <input type="number" formControlName="deficitPercentage" name="deficitPercentage" id="deficitPercentage" class="form-control rounded-left"
                 placeholder="Enter deficit percentage">
         </div>
+        <div class="text-danger error-message">
+            <small  *ngIf="addForm.controls['deficitPercentage'].errors?.required && isSubmit">Please enter Deficit percentage.</small>
+        </div>
         <div class="form-group">
             <label for="mealSchedule">Meal Schedule</label>
-            <input type="number" formControlName="mealSchedule" name="mealSchedule" id="mealSchedule" class="form-control rounded-left"
+            <input type="text" formControlName="mealSchedule" name="mealSchedule" id="mealSchedule" class="form-control rounded-left"
                 placeholder="Enter meal schedule">
         </div>
+        <div class="text-danger error-message">
+            <small  *ngIf="addForm.controls['mealSchedule'].errors?.required && isSubmit">Please enter Meal schedule.</small>
+        </div>
         <div class="w-50 mb-2">
-            <input type="checkbox" formControlName="isPrimary" checked="">&nbsp;
-            <label class="checkbox-wrap checkbox-primary" for="isPrimary">IsPrimary
+            <input type="checkbox" formControlName="isDefault" checked="">&nbsp;
+            <label class="checkbox-wrap checkbox-primary" for="isDefault">IsDefault
             </label>
         </div>
         <div class="justify-content-center">
-            <button type="submit" class=" btn btn-primary  submit px-3" >Save</button>
+            <button type="submit" class=" btn btn-primary  submit px-3" (click)="addDiet()">Add</button>
         </div>
     </form>
-</p-dialog>  -->
+</p-dialog>
+
+<!-- update Modal -->
+
+<p-dialog header="Add Diet" [(visible)]="isVisible" [style]="{ width: '40vw', height: 'auto' }">
+    <form  [formGroup]="updateForm">
+        <div class="form-group">
+            <label for="dietName">Diet Name</label>
+            <input type="text" formControlName="dietName" name="dietName" id="dietName" class="form-control rounded-left"
+                placeholder="Enter Diet name">
+        </div>
+        <div class="text-danger error-message">
+            <small  *ngIf="updateForm.controls['dietName'].errors?.required && isSubmit">Please enter Diet name.</small>
+        </div>
+        <div class="form-group">
+            <label for="proteinPercentage">Protein Percentage</label>
+            <input type="number" formControlName="proteinPercentage" name="proteinPercentage" id="proteinPercentage" class="form-control rounded-left"
+                placeholder="Enter protein percentage">
+        </div>
+        <div class="text-danger error-message">
+            <small  *ngIf="updateForm.controls['proteinPercentage'].errors?.required && isSubmit">Please enter protein percentage.</small>
+        </div>
+        <div class="form-group">
+            <label for="carbsPercentage">Carbs Percentage</label>
+            <input type="number" formControlName="carbsPercentage" name="carbsPercentage" id="carbsPercentage" class="form-control rounded-left"
+                placeholder="Enter carbs percentage">
+        </div>
+        <div class="text-danger error-message">
+            <small  *ngIf="updateForm.controls['carbsPercentage'].errors?.required && isSubmit">Please enter Carbs percentage.</small>
+        </div>
+        <div class="form-group">
+            <label for="fatPercentage">Fat Percentage</label>
+            <input type="number" formControlName="fatPercentage" name="fatPercentage" id="fatPercentage" class="form-control rounded-left"
+                placeholder="Enter fat percentage">
+        </div>
+        <div class="text-danger error-message">
+            <small  *ngIf="updateForm.controls['fatPercentage'].errors?.required && isSubmit">Please enter fat percentage.</small>
+        </div>
+        <div class="form-group">
+            <label for="surplusPercentage">Sur Plus Percentage</label>
+            <input type="number" formControlName="surplusPercentage" name="surplusPercentage" id="surplusPercentage" class="form-control rounded-left"
+                placeholder="Enter surplus percentage">
+        </div>
+        <div class="text-danger error-message">
+            <small  *ngIf="updateForm.controls['surplusPercentage'].errors?.required && isSubmit">Please enter Surplus percentage.</small>
+        </div>
+        <div class="form-group">
+            <label for="deficitPercentage">Deficit Percentage</label>
+            <input type="number" formControlName="deficitPercentage" name="deficitPercentage" id="deficitPercentage" class="form-control rounded-left"
+                placeholder="Enter deficit percentage">
+        </div>
+        <div class="text-danger error-message">
+            <small  *ngIf="updateForm.controls['deficitPercentage'].errors?.required && isSubmit">Please enter Deficit percentage.</small>
+        </div>
+        <div class="form-group">
+            <label for="mealSchedule">Meal Schedule</label>
+            <input type="text" formControlName="mealSchedule" name="mealSchedule" id="mealSchedule" class="form-control rounded-left"
+                placeholder="Enter meal schedule">
+        </div>
+        <div class="text-danger error-message">
+            <small  *ngIf="updateForm.controls['mealSchedule'].errors?.required && isSubmit">Please enter Meal schedule.</small>
+        </div>
+        <div class="w-50 mb-2">
+            <input type="checkbox" formControlName="isDefault" checked="">&nbsp;
+            <label class="checkbox-wrap checkbox-primary" for="isDefault">IsDefault
+            </label>
+        </div>
+        <div class="justify-content-center">
+            <button type="submit" class=" btn btn-primary  submit px-3" (click)="updateDiet()">Add</button>
+        </div>
+    </form>
+</p-dialog>
+
+<div class="card flex justify-content-center">
+    <p-confirmDialog #cd [style]="{width: '30vw'}">
+        <ng-template pTemplate="header">
+            <h3>Header Content</h3>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+            <button type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+        </ng-template>
+    </p-confirmDialog>
+    <!-- <p-button (click)="confirm1()" icon="pi pi-check" label="Confirm"></p-button> -->
+</div>
+<p-toast></p-toast>

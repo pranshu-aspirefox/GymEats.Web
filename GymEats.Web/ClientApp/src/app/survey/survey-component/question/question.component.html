@@ -1,0 +1,24 @@
+<p-card>
+<div >
+       <label class="d-flex text-black">Select Your question :</label>     
+       <select class="form-select" aria-label="Default select example">
+        <option *ngFor="let que of questionList" [value]="que.id">{{que.label}}</option>
+      </select>
+     <div class="d-flex text-black">
+            <label fullWidth>Select the answer type:</label> 
+    </div>
+            <form  [formGroup]="formGroup" class="d-flex p-2 gap-2 m-2 text-black">
+                <div *ngFor="let category of options" >
+                    <p-radioButton [inputId]="category.key" [value]="category" formControlName="selectedCategory"></p-radioButton>
+                    <label [for]="category.key" class="ml-2">{{ category.name }}</label>
+                </div>
+               
+            </form>
+        <div class="quesTemo">
+            <div clas="option">
+             <!-- <app-option></app-option> -->
+            </div>
+       <p-button label="Add new option" class="d-flex" ></p-button> 
+        </div>
+</div>
+</p-card>

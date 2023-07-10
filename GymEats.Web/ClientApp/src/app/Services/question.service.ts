@@ -32,7 +32,6 @@ export class QuestionService {
   }
 addNewQuestion(data:any):Observable<any>
 {
-  debugger;
   return this.http.post<any>(`${this.apiUrl}/api/Question/AddQuestion`,data,{headers:this.headers})
 }
 updateQuestion(data:any):Observable<any>

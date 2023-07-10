@@ -9,7 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { ToolbarModule } from 'primeng/toolbar';
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -17,6 +17,7 @@ import { ToolbarModule } from 'primeng/toolbar';
   ],
   imports: [
     CommonModule,
+    ConfirmDialogModule,
     ToolbarModule,
     TableModule,
     DialogModule,

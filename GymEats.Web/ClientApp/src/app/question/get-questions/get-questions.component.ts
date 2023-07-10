@@ -50,10 +50,10 @@ export class GetQuestionsComponent {
         message: 'Are you sure that you want to delete?',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-          debugger;
             this.questionService.deleteQuestion(data).subscribe({
               next: (result) => {
                   this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Question deleted Successfully.' });
+                  this.ngOnInit();
                   // this.router.navigate(['/question/getQuestionList']);
               },
               error: (err) => {
@@ -92,7 +92,8 @@ addQuestion()
     else{
  this.questionService.addNewQuestion(this.addForm.value).subscribe((res)=>{
   this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Question Added Successfully.' });
-   this.router.navigate(['/question/getQuestionList']);
+  this.ngOnInit();
+  0
   this.visible=false;
  },(err)=>{
   this.errorMessage = err.error.errorMessage;
@@ -118,13 +119,13 @@ updateQuestion()
   
   else{
   this.questionService.updateQuestion(this.updateForm.value).subscribe((result)=>{
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Question Updated Successfully.' });
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Diet Updated Successfully.' });
   },(err)=>{
     this.messageService.add({ severity: 'error', summary: 'Error', detail: this.errorMessage ?? "Something went wrong please try again." });
   })
 }
 }
-openUdateModal(id:string)
+openUpdateModal(id:string)
 {
   debugger;
   this.questionService.getQuestionById(id).subscribe((res)=>{
@@ -137,6 +138,7 @@ openUdateModal(id:string)
     this.messageService.add({ severity: 'error', summary: 'Error', detail: this.errorMessage ?? "Something went wrong please try again." });
   })
 }
+
 
 
 }

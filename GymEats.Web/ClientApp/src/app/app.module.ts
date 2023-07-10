@@ -46,6 +46,21 @@ import { DatePipe } from '@angular/common';
       path: 'diet',
       loadChildren: () => import('./diet/diet.module')
         .then(m => m.DietModule),
+    },
+    {
+      path: 'option',
+      loadChildren: () => import('./option/option.module')
+        .then(m => m.OptionModule),
+    },
+    {
+      path:'survey',
+      loadChildren:()=> import('./survey/survey.module')
+      .then(m=>m.SurveyModule)
+    },
+    {
+      path: 'users',
+      loadChildren:() =>import('./user-details/user-details.module')
+      .then(m => m.UserDetailsModule)
     }
     ])
   ],

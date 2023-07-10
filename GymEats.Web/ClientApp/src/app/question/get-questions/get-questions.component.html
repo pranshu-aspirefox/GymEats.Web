@@ -13,10 +13,10 @@
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5, 10, 20]">
     <ng-template pTemplate="header">
         <tr>
-            <th style="width:25%">Label</th>
-            <th style="width:25%">Isprimary</th>
-            <th style="width:25%">Createdon</th>
-            <th style="width:25%">Action</th>
+            <th >Label</th>
+            <th >Isprimary</th>
+            <th >Createdon</th>
+            <th >Action</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-item>
@@ -25,10 +25,13 @@
             <td>{{ item.isPrimary }}</td>
             <td>{{ item.createdOn }}</td>
             <td>
-                <a role="button" ><i class="pi pi-pencil text-black-50"
-                        style="font-size: 1.5rem;" (click)="openUdateModal(item.id)"></i></a>&nbsp;
+                <!-- <a role="button" ><i class="pi pi-pencil text-black-50"
+                        style="font-size: 1.5rem;" (click)="openUpdateModal(item.id)"></i></a>&nbsp;
+                    
                 <a role="button" (click)="confirm($event,item.id)"><i class="pi pi-trash text-black-50"
-                        style="font-size: 1.5rem"></i></a>
+                        style="font-size: 1.5rem"></i></a> -->
+                    <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-success " (click)="openUpdateModal(item.id)"></p-button>
+                    <p-button icon="pi pi-trash" styleClass="p-button-rounded p-button-danger " (click)="confirm($event,item.id)"></p-button> 
             </td>
         </tr>
     </ng-template>
