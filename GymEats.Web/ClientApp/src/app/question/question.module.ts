@@ -26,8 +26,7 @@ import { GetQuestionsComponent } from './get-questions/get-questions.component';
     ConfirmPopupModule,
     ToastModule,
     RouterModule.forChild([
-    //  {path:'getQuestionList',component:GetQuestionListComponent},
-     {path:'getQuestions',component:GetQuestionsComponent},
+     {path:'',component:GetQuestionsComponent},
     ])
   ]
 })

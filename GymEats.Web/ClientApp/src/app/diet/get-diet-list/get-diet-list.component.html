@@ -1,10 +1,10 @@
 <div class="card">
     <p-toolbar>
         <div class="p-toolbar-group-start">
-            <h3 class="ng-star-inserted">Diet-List</h3>
+            <h3 id="dietHeader" class="ng-star-inserted"><span class="fa-solid fa-utensils"></span> Diet-List</h3>
         </div>
         <div class="p-toolbar-group-end">
-            <button pButton pRipple label="Add" class="p-button-success" icon="pi pi-plus" (click)="showModal()"></button>
+            <button id="addBtn" pButton pRipple label="Add" class="p-button-success" icon="pi pi-plus" (click)="showModal()"></button>
         </div>
     </p-toolbar>
 </div>
@@ -14,11 +14,11 @@
     [rows]="10"
     [showCurrentPageReport]="true"
     [tableStyle]="{ 'min-width': '50rem' }"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
     [rowsPerPageOptions]="[10, 25, 50]"
 >
     <ng-template pTemplate="header">
-        <tr>
+        <tr id="tblHeader">
             <th >Diet Name</th>
             <th >Protein Percentage</th>
             <th >Carbs Percentage</th>
@@ -53,7 +53,7 @@
     
 </p-table>
  <!-- Add-Diet-Modal -->
-<p-dialog header="Add Diet" [(visible)]="visible" [style]="{ width: '40vw', height: 'auto' }">
+<p-dialog header="Add Diet" [(visible)]="visible" [style]="{ width: '40vw', height: 'auto' }" [modal]="true">
     <form  [formGroup]="addForm">
         <div class="form-group">
             <label for="dietName">Diet Name</label>
@@ -124,7 +124,7 @@
 
 <!-- update Modal -->
 
-<p-dialog header="Add Diet" [(visible)]="isVisible" [style]="{ width: '40vw', height: 'auto' }">
+<p-dialog header="Add Diet" [(visible)]="isVisible" [style]="{ width: '40vw', height: 'auto' }" [modal]="true">
     <form  [formGroup]="updateForm">
         <div class="form-group">
             <label for="dietName">Diet Name</label>

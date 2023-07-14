@@ -30,4 +30,45 @@
 }
 #ds a{
     text-decoration: none;
+    color: #026583;
 }
+
+#submitBtn{
+    background-color: #004c63;
+    color: #fff;
+}
+
+#brandName ,#rememberLbl{
+    color: #004c63;
+}
+#rememberCheck:checked {
+    background-color: #004c63 !important;
+    color: #ffffff !important;
+  }
+#rememberCheck:after {
+      box-shadow: none !important;
+  }
+
+  .input-container span {
+    position: relative;
+    bottom: 27px;
+    float: right;
+    right: 7px;
+    transform: translateY(-50%); 
+  }
+  
+  .eye_button_style {
+    margin-right: 5px;
+    border: none;
+    color: #2F6463;
+    margin-top: 5px;
+  }
+
+  .passwordEye{
+    float: right;
+        margin-right: 10px;
+        margin-top: -40px;
+        position: relative;
+        z-index: 2;
+        color: #004c63;
+  }

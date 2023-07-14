@@ -45,7 +45,6 @@ export class AuthService {
     return decodeToken["role"];
   }
   forgetPassword(credentials: ForgetPasswordModel): Observable<any> {
-    debugger
     return this.http.post<AuthenticatedResponse>(`${this.apiUrl}/api/Auth/request-pass`, credentials, { 'headers': this.headers });
   }
   resetPassword(credentials: ResetPasswordModel): Observable<any> {
@@ -56,6 +55,7 @@ export class AuthService {
     this.headers = new HttpHeaders().set("Authorization", "Bearer " + accessToken);
     return this.http.post<AuthenticatedResponse>(`${this.apiUrl}/api/Auth/ChangePassword`, credentials, { 'headers': this.headers });
   }
+
 }
 
 

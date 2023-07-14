@@ -1,0 +1,24 @@
+#quesHeader, #quesTblHeader th{
+    color: #004c63;
+}
+
+#addBtn{
+    background-color: #4da04d;
+    color: #fff;
+    border: none;
+}
+#addBtn:hover{
+    background-color: #3b863b;
+    color: #fff;
+    border: none;
+}
+
+#saveQuestionBtn{
+    background-color: #336633;
+    color: #fff;
+    border: none;
+}
+#saveQuestionBtn:hover{
+    background-color: #498649;
+    color: #fff;
+}

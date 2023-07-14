@@ -27,7 +27,6 @@ export class QuestionService {
     return this.http.delete(`${this.apiUrl}/api/Question/DeleteQuestion/${id}`,{headers:this.headers});
   }
   getQuestionById(id:string):Observable<any>{
-    debugger;
    return this.http.get<UpdateQuestionModel>(`${this.apiUrl}/api/Question/GetQuestionById/${id}`,{headers:this.headers})
   }
 addNewQuestion(data:any):Observable<any>

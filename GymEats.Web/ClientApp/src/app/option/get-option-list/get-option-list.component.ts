@@ -71,7 +71,6 @@ addOption()
      }
 }
 initializeUpdateForm(data: UpdateOptionModal):void{
-  debugger
   this.updateForm=this.fb.group({
     id:new FormControl(data.id,[Validators.required]),
     label:new FormControl(data.label,[Validators.required]),

@@ -24,7 +24,6 @@ export class AddSurveyComponent {
   { }
 ngoninit()
 {
-  debugger;
   this.questionService.getQuestionDetails().subscribe({
     next: (questionList: Question[]) => {
       this.questionList = questionList;

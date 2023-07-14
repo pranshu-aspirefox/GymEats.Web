@@ -4,19 +4,18 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LoginComponent } from './auth/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from "./app.component";
 import { DatePipe } from '@angular/common';
+import { AuthGuard } from './Services/auth.guard';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     CounterComponent,
     FetchDataComponent
   ],
@@ -27,45 +26,30 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    
     RouterModule.forRoot([
-    { path: '', component: HomeComponent, pathMatch: 'full' },
-    { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-     {
-      path: 'auth',
-      loadChildren: () => import('./auth/auth.module')
-        .then(m => m.AuthModule),
-    },
-    {
-      path: 'question',
-      loadChildren: () => import('./question/question.module')
-        .then(m => m.QuestionModule),
-    },
-    {
-      path: 'diet',
-      loadChildren: () => import('./diet/diet.module')
-        .then(m => m.DietModule),
-    },
-    {
-      path: 'option',
-      loadChildren: () => import('./option/option.module')
-        .then(m => m.OptionModule),
-    },
-    {
-      path:'survey',
-      loadChildren:()=> import('./survey/survey.module')
-      .then(m=>m.SurveyModule)
-    },
-    {
-      path: 'users',
-      loadChildren:() =>import('./user-details/user-details.module')
-      .then(m => m.UserDetailsModule)
-    }
-    ])
+      {
+        path: 'auth',
+        loadChildren: () => import('./auth/auth.module')
+          .then(m => m.AuthModule)
+      },
+
+      {path:'error', loadChildren: () => import('./error/error.module').then(m=>m.ErrorModule)},
+
+      {path:'',component:AppComponent,
+      children:[
+      {
+        path: 'admin',
+        loadChildren: () => import('./admin/admin.module')
+          .then(m => m.AdminModule)
+      },
+      { path: '', redirectTo: 'admin', pathMatch: 'full'},
+      { path: '**', redirectTo: 'admin'},
+    ],canActivate: [AuthGuard],data: {role: 'Admin'}},
+    ]),
+
   ],
  
-  providers: [DatePipe],
+  providers: [DatePipe, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

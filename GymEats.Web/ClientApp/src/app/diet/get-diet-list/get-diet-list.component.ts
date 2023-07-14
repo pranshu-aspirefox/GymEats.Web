@@ -86,7 +86,6 @@ addDiet()
      }
 }
 initializeUpdateForm(data: any):void{
-  debugger
   this.updateForm=this.fb.group({
     id:new FormControl(data.id,[Validators.required]),
     dietName:new FormControl(data.dietName,[Validators.required]),
@@ -107,7 +106,6 @@ initializeUpdateForm(data: any):void{
 }
 openUpdateModal(id:string)
 {
- debugger
   this.dietService.getDietById(id).subscribe((res)=>{
   this.updateData=res.data;
   console.log(this.updateData)  ; 

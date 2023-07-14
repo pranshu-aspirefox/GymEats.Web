@@ -38,7 +38,6 @@ export class ResetPasswordComponent implements OnInit {
   }
  
   SendRequest() {
-    debugger;
   this.isSubmitted = true
   if (this.resetPasswordForm.invalid) {
     return

@@ -1,16 +1,16 @@
 <div class="card">
     <p-toolbar>
         <div class="p-toolbar-group-start">
-            <h3 class="ng-star-inserted text-black-50"><i class="pi pi-users" style="font-size: 2rem;font-weight: bold;"></i> User Details</h3>
+            <h3 id="userHeader" class="ng-star-inserted"><i class="pi pi-users fa-lg"></i> User Details</h3>
         </div>
         
     </p-toolbar>
 </div>
-<p-table [value]="usersInfo" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+<p-table [value]="allUsersInfo" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
     [tableStyle]="{ 'min-width': '50rem' }"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} items" [rowsPerPageOptions]="[5, 10, 20]">
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records" [rowsPerPageOptions]="[5, 10, 20]">
     <ng-template pTemplate="header">
-        <tr>
+        <tr id="tblHeader">
             <th >Name</th>
             <th >Email</th>
             <th >Age</th>
