@@ -35,15 +35,10 @@ export class GetOptionListComponent {
     this.optionService.getOptionList().subscribe({
       next: (result) => {
         this.options=result.data;
-        console.log('dietList ',result.data);
       },
       error: (err) => {
-        debugger
-        if(err.data==null)
-        {
           this.showData=false;
-        }
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: err.errorMessage ?? "Something went wrong please try again." });
+          this.options = [];
       }
     });
   this.initializeForm();
@@ -118,14 +113,16 @@ confirm1(id:string) {
   this.isDelete=true;
 }
 deleteOption(){
-  this.optionService.deleteOption(this.data).subscribe((result)=>{
+    this.optionService.deleteOption(this.data).subscribe({next:(result)=>{
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Option deleted Successfully' });
     this.isDelete=false;
     this.ngOnInit();
-  },(err)=>{
+  },
+  error:(err)=>{
     this.errorMessage = err.error.errorMessage;
     this.messageService.add({ severity: 'error', summary: 'Error', detail: this.errorMessage ?? "Something went wrong please try again." });
-  })
+  }
+})
 }
 cancel()
 {

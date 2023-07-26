@@ -42,10 +42,9 @@ export class GetDietListComponent {
     this.dietService.getDietList().subscribe({
       next: (result) => {
         this.diet=result.data;
-        console.log('dietList ',result);
       },
       error: (err) => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: this.errorMessage ?? "Something went wrong please try again." });
+        this.diet = [];
       }
     });
     this.initializeForm();

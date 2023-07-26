@@ -7,7 +7,6 @@ import { GetuserDetailsComponent } from './getuser-details/getuser-details.compo
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthGuard } from '../Services/auth.guard';
 import { SettingComponent } from './setting/setting.component';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';

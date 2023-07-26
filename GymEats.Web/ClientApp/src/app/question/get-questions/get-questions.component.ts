@@ -37,10 +37,9 @@ export class GetQuestionsComponent {
        this.questionService.getQuestionDetails().subscribe({
         next: (result) => {
           this.question=result.data;
-          console.log('questionList ',result);
         },
         error: (err) => {
-          this.errorMessage = err.error.errorMessage;
+          this.question=[];
         }
       });
   }

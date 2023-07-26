@@ -1,10 +1,10 @@
 <div class="card">
     <p-toolbar>
-        <div class="p-toolbar-group-start">
-            <h3 id="optHeader" class="ng-star-inserted"><span class="fa-solid fa-clipboard-list"></span> Options</h3>
-        </div>
+      <div class="p-toolbar-group-start">
+        <h3 id="optHeader" class="ng-star-inserted"><span class="fa-solid fa-clipboard-list"></span> Options</h3>
+      </div>
         <div class="p-toolbar-group-end">
-            <button id="addBtn" pButton pRipple label="Add" class="p-button-success" icon="pi pi-plus" (click)="showModal()"></button>
+          <button id="addBtn" pButton pRipple label="Add" class="p-button-success" icon="pi pi-plus" (click)="showModal()"></button>
         </div>
     </p-toolbar>
 </div>
@@ -18,14 +18,14 @@
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
     [rowsPerPageOptions]="[10, 25, 50]"
 >
-    <ng-template pTemplate="header">
-        <tr id="tblHeader">
-            <th >Label</th>
-            <th >Is Exclusive</th>
-            <th>Action</th>
-        </tr>
-       
-    </ng-template>
+  <ng-template pTemplate="header">
+    <tr id="tblHeader">
+      <th>Label</th>
+      <th>Is Exclusive</th>
+      <th>Action</th>
+    </tr>
+
+  </ng-template>
     <ng-template pTemplate="body" let-item>
         <tr >
             <td>{{ item.label }}</td>
@@ -40,7 +40,7 @@
     
 </p-table>
 <!-- Add Modal -->
-<p-dialog header="Option" [(visible)]="visible" [style]="{width: '30vw'}" [modal]="true">
+<p-dialog header="Option" [(visible)]="visible"  [modal]="true" [draggable]="false" [style]="{width: '30vw'}">
     <form [formGroup]="addForm">
         <div class="form-group">
             <label for="Label">Label</label>
@@ -62,7 +62,7 @@
     </form>
 </p-dialog>
 <!-- Update Modal -->
-<p-dialog header="Option" [(visible)]="isVisible" [style]="{width: '30vw'}" [modal]="true">
+<p-dialog header="Option" [(visible)]="isVisible"  [modal]="true" [draggable]="false" [style]="{width: '30vw'}">
     <form [formGroup]="updateForm">
         <div class="form-group">
             <label for="label">Label</label>
