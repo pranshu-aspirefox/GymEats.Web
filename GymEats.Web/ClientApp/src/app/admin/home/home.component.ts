@@ -26,7 +26,7 @@ export class HomeComponent {
             label: 'Survey',
             icon: 'fa-solid fa-clipboard-user fa-lg',
             iconClass: 'menu-icon',
-            command: () => {}
+            command: (click) => {this.router.navigate(['/admin/survey'])}
         },
         {
           label: 'User Details',

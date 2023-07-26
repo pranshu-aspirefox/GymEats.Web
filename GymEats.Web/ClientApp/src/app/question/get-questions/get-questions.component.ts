@@ -19,11 +19,10 @@ export class GetQuestionsComponent {
   isDelete:boolean=false;
   question!: any[];
   isVisible: boolean = false;
-  addForm: FormGroup = this.fb.group
-  ({
-      label:new FormControl('',[Validators.required]),
-      isPrimary:new FormControl(false),
-      createdBy:new FormControl('')
+  addForm: FormGroup = this.fb.group({
+    label:new FormControl('',[Validators.required]),
+    isPrimary:new FormControl(false),
+    createdBy:new FormControl('')
   });
   updateForm=this.fb.group({
     id:new FormControl(''),
@@ -84,24 +83,22 @@ showModal()
 }
 addQuestion()
 {
-  debugger
-  this.isSubmit = true;
-  if (this.addForm.invalid) 
-  {
+    this.isfailed = false;
+    this.isSubmit = true
+    if (this.addForm.invalid) {
       return;
-  }
-  else
-  {
-    this.questionService.addNewQuestion(this.addForm.value).subscribe((res)=>{
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Question Added Successfully.' });
-    this.ngOnInit();
-    this.visible=false;
-    },
-    (err)=>{
-      this.errorMessage = err.error.errorMessage;
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: this.errorMessage ?? "Something went wrong please try again."  });
-    })
-  }
+    }
+    else{
+ this.questionService.addNewQuestion(this.addForm.value).subscribe((res)=>{
+  this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Question Added Successfully.' });
+  this.ngOnInit();
+  0
+  this.visible=false;
+ },(err)=>{
+  this.errorMessage = err.error.errorMessage;
+  this.messageService.add({ severity: 'error', summary: 'Error', detail: this.errorMessage ?? "Something went wrong please try again."  });
+ })
+}
 }
 
 initializeUpdateForm(data: any):void{
@@ -118,6 +115,7 @@ updateQuestion()
   if (this.updateForm.invalid) {
     return;
   }
+  
   else{
   this.questionService.updateQuestion(this.updateForm.value).subscribe((result)=>{
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Diet Updated Successfully.' });
@@ -128,6 +126,7 @@ updateQuestion()
 }
 openUpdateModal(id:string)
 {
+  debugger;
   this.questionService.getQuestionById(id).subscribe((res)=>{
   this.updateData=res.data;
   console.log(this.updateData)  ; 

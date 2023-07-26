@@ -55,7 +55,11 @@ import { ToastModule } from 'primeng/toast';
             loadChildren: () => import('../diet/diet.module')
                   .then(m => m.DietModule),
           },
-          {path:'setting', component: SettingComponent}
+          {path:'setting', component: SettingComponent},
+          {path:'survey', 
+           loadChildren: () =>import('../survey/survey.module')
+                  .then(m => m.SurveyModule) 
+          }
 
        ]},
       

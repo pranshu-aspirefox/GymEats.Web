@@ -48,6 +48,7 @@ import { BrowserModule } from '@angular/platform-browser';
     DialogModule,
     RadioButtonModule,
     RouterModule.forChild([
+        {path:'', redirectTo:'editSurvey',pathMatch:'full'},
         {
           path:'addNewSurvey',
           component:AddSurveyComponent
