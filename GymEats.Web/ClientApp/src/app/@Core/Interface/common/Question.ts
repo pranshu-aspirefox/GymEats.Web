@@ -5,8 +5,7 @@ export class Question {
     isPrimary?: boolean;
     answerType?: number;
     options?: Option[];
-    createdBy?: string;
-    createdOn?: string;
     sequenceNumber?:Number;
-
 }
+
+export { Option };

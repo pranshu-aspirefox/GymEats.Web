@@ -1,0 +1,21 @@
+:host ::ng-deep .col,.p-button {
+    padding: 0.5rem 0.95rem;
+    font-size: 1rem;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 7px;
+} 
+:host ::ng-deep .h5,h5{
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    float: left;
+    line-height: 2.2;
+}
+:host ::ng-deep .resetBtn .p-button {
+    
+    padding: .35rem 0.55rem;
+  
+}
+:host ::ng-deep .p-dialog .p-dialog-header {
+    padding: 0;
+}

@@ -1,0 +1,13 @@
+/* :host ::ng-deep .p-dropdown{
+  
+   
+  }  */
+  :host ::ng-deep .p-dropdown .p-dropdown-label.p-placeholder{
+    width: 100%;
+    margin-top: 7px;
+  display: flex;
+  }
+  :host ::ng-deep .p-dropdown .p-dropdown-label 
+  {
+    text-align: left;
+  }

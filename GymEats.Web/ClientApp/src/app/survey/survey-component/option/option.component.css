@@ -1,0 +1,11 @@
+:host ::ng-deep  .delBtn{
+display: flex;
+justify-content: end;
+}
+:host ::ng-deep .p-icon {
+    margin-top: -8px;
+    position: absolute;
+    right: 0.5em;
+    top: 50%;
+    right:2%
+}

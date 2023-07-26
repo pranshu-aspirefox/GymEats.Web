@@ -1,0 +1,13 @@
+:host ::ng-deep .h5,h5{
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    float: left;
+    line-height: 2.2;
+}
+:host ::ng-deep .card-footer,.p-button {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 7px;
+}

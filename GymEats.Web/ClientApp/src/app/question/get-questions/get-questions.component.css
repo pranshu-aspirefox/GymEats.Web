@@ -1,0 +1,8 @@
+:host ::ng-deep .resetBtn .p-button {
+    
+    padding: .5rem 0.75rem;
+  
+}
+:host ::ng-deep .p-dialog .p-dialog-header {
+    padding: 0;
+}

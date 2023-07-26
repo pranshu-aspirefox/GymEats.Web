@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
+import { DropdownModule } from 'primeng/dropdown';
 @NgModule({
   declarations: [
     GetDietListComponent
@@ -20,6 +20,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ConfirmDialogModule,
     ToolbarModule,
     TableModule,
+    DropdownModule,
     DialogModule,
     FormsModule,
     ReactiveFormsModule,

@@ -14,11 +14,13 @@ export class GetQuestionsComponent {
   errorMessage: string='';
   isfailed:boolean = false;
   isSubmit:boolean=false;
+  data:any;
   visible: boolean = false;
+  isDelete:boolean=false;
   question!: any[];
   isVisible: boolean = false;
   addForm: FormGroup = this.fb.group({
-    label:new FormControl(''),
+    label:new FormControl('',[Validators.required]),
     isPrimary:new FormControl(false),
     createdBy:new FormControl('')
   });
@@ -43,34 +45,32 @@ export class GetQuestionsComponent {
       });
   }
   
-  confirm(event: Event,data:string) {
-    
-    this.confirmationService.confirm({
-        target: event.target as EventTarget,
-        message: 'Are you sure that you want to delete?',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-            this.questionService.deleteQuestion(data).subscribe({
+  confirm(id:string) {
+    this.isDelete=true;
+    this.data=id
+}
+deleteQuestion()
+{
+  this.questionService.deleteQuestion(this.data).subscribe({
               next: (result) => {
                   this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Question deleted Successfully.' });
+                  this.isDelete=false;
                   this.ngOnInit();
-                  // this.router.navigate(['/question/getQuestionList']);
               },
               error: (err) => {
                 this.errorMessage = err.error.errorMessage;
                 this.messageService.add({ severity: 'error', summary: 'Error', detail: this.errorMessage ?? "Something went wrong please try again." });
               }
             })
-        },
-        reject: () => {
-            this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
-        }
-    });
+}
+cancel()
+{
+  this.isDelete=false;
 }
 initializeForm(): void
 {
   this.addForm=this.fb.group({
-    Label:new FormControl('',[Validators.required]),
+    label:new FormControl('',[Validators.required]),
     isPrimary:new FormControl(false),
     createdBy:new FormControl('')
   })
@@ -80,7 +80,6 @@ initializeForm(): void
 showModal()
 {
   this.visible=true;
-  
 }
 addQuestion()
 {
@@ -138,7 +137,4 @@ openUpdateModal(id:string)
     this.messageService.add({ severity: 'error', summary: 'Error', detail: this.errorMessage ?? "Something went wrong please try again." });
   })
 }
-
-
-
 }

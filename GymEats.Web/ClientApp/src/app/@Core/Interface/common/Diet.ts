@@ -6,10 +6,6 @@ export interface Diet {
     fatPercentage: number;
     surplusPercentage: number;
     deficitPercentage: number;
-    createdBy: string;
-    createdOn: string;
     isDefault: boolean;
     mealSchedule: string;
-    clickBankProductId : string;
-
 }

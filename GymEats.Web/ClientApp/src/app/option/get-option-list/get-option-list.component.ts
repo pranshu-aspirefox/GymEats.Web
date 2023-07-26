@@ -17,8 +17,11 @@ export class GetOptionListComponent {
   visible: boolean = false;
   isSubmit:boolean=false;
   errorMessage:string=''
+  data:any;
+  isDelete:boolean=false;
   addForm!:FormGroup;
   isVisible:boolean=false;
+  showData:boolean=true;
   updateData: any;
   updateForm=this.fb.group({
     id:new FormControl('',[Validators.required]),
@@ -32,10 +35,15 @@ export class GetOptionListComponent {
     this.optionService.getOptionList().subscribe({
       next: (result) => {
         this.options=result.data;
-        console.log('dietList ',result);
+        console.log('dietList ',result.data);
       },
       error: (err) => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: this.errorMessage ?? "Something went wrong please try again." });
+        debugger
+        if(err.data==null)
+        {
+          this.showData=false;
+        }
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: err.errorMessage ?? "Something went wrong please try again." });
       }
     });
   this.initializeForm();
@@ -46,7 +54,6 @@ export class GetOptionListComponent {
       label:new FormControl('',[Validators.required]),
       isExclusive:new FormControl(false),
       createdBy:new FormControl('')
-      
     });
   }
   showModal()
@@ -108,29 +115,21 @@ updateOption()
 }
 }
 confirm1(id:string) {
-  this.confirmationService.confirm({
-      message: 'Are you sure that you want to proceed?',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-          this.optionService.deleteOption(id).subscribe((result)=>{
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Option deleted Successfully' });
-            this.ngOnInit();
-          },(err)=>{
-            this.errorMessage = err.error.errorMessage;
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: this.errorMessage ?? "Something went wrong please try again." });
-          })
-         
-      },
-      reject: (type: ConfirmEventType) => {
-          switch (type) {
-              case ConfirmEventType.REJECT:
-                  this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'Option not Deleted' });
-                  break;
-              case ConfirmEventType.CANCEL:
-                  this.messageService.add({ severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled' });
-                  break;
-          }
-      }
-  });
+  this.data=id;
+  this.isDelete=true;
+}
+deleteOption(){
+  this.optionService.deleteOption(this.data).subscribe((result)=>{
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Option deleted Successfully' });
+    this.isDelete=false;
+    this.ngOnInit();
+  },(err)=>{
+    this.errorMessage = err.error.errorMessage;
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: this.errorMessage ?? "Something went wrong please try again." });
+  })
+}
+cancel()
+{
+  this.isDelete=false;
 }
 }

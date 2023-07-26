@@ -14,7 +14,9 @@ export class GetDietListComponent {
   diet!: any[];
   visible: boolean = false;
   isSubmit:boolean=false;
-  errorMessage:string=''
+  errorMessage:string='';
+  isDelete:boolean=false;
+  data:any;
   addForm!:FormGroup;
   isVisible:boolean=false;
   position: string = 'center';
@@ -33,6 +35,7 @@ export class GetDietListComponent {
     isActive:new FormControl(true),
     isDeleted:new FormControl(false),
   });
+  formGroup: FormGroup | undefined;
   constructor(private dietService: DietService,private fb: FormBuilder,private router:Router,private messageService:MessageService,private confirmationService:ConfirmationService) {}
   ngOnInit()
   {
@@ -138,30 +141,23 @@ updateDiet()
 
 
 confirm1(id:string) {
-  this.confirmationService.confirm({
-      message: 'Do you want to delete',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.dietService.deleteDiet(id).subscribe((result)=>{
-        this.messageService.add({ severity: 'success', summary: 'success', detail: 'Diet Deleted Successfully' });
-        this.ngOnInit();
-        },(err)=>{
-          this.errorMessage = err.error.errorMessage;
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: this.errorMessage ?? "Something went wrong please try again." });
-          // this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
-        })
-        
-      },
-      reject: (type: ConfirmEventType) => {
-          switch (type) {
-              case ConfirmEventType.REJECT:
-                  this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
-                  break;
-              case ConfirmEventType.CANCEL:
-                  this.messageService.add({ severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled' });
-                  break;
-          }
-      }
-  });
+  this.data=id;
+  this.isDelete=true;
+}
+deleteDiet()
+{
+  this.dietService.deleteDiet(this.data).subscribe((result)=>{
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Diet deleted Successfully' });
+    this.isDelete=false;
+    this.ngOnInit();
+  },(err)=>{
+    this.errorMessage = err.error.errorMessage;
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: this.errorMessage ?? "Something went wrong please try again." });
+  })
+}
+cancel()
+{
+  this.isDelete=false;
 }
 }
+

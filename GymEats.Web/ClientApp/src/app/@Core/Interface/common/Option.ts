@@ -3,7 +3,7 @@ import { Diet } from './Diet';
 export class Option{
     id!:string;
     label!:string
-    question_diet!:number;
+    question_Diet!:number;
     isOpen!:boolean;
     isExclusive?:boolean;
     question?:Question ;

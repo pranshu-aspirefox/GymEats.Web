@@ -1,7 +1,8 @@
-<div class="card">
-<div class="card-body">
-<select class="form-select" aria-label="Default select example" placeholder="--Select Question--">
-    <option  *ngfor="let diet of dietList" [value]="diet.id">{{diet.name}}</option>
-  </select>
-</div>
-</div>
+<!-- <select class="form-select" aria-label="Default select example">
+    <option *ngif="let item of dietList">{{item.dietName}}</option>
+
+  </select> -->
+
+
+<p-dropdown [options]="dietList"   optionLabel="dietName" optionValue="id" [disabled]="disabled"
+[(ngModel)]="diet.id" class="m-2"  [attr.select-valid]="validateDiet()" placeholder="select diet" (onChange)="dietAdd(diet.id)"></p-dropdown>

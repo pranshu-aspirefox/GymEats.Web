@@ -24,21 +24,23 @@
             <th >Is Exclusive</th>
             <th>Action</th>
         </tr>
+       
     </ng-template>
     <ng-template pTemplate="body" let-item>
-        <tr>
+        <tr >
             <td>{{ item.label }}</td>
             <td>{{ item.isExclusive }}</td>
             <td>
                 <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-success " (click)="openUpdateModal(item.id)"></p-button>
                 <p-button icon="pi pi-trash" styleClass="p-button-rounded p-button-danger " (click)="confirm1(item.id)"></p-button> 
             </td>
-        </tr>
+        </tr>  
     </ng-template>
+    <h5 style="text-align: center;"  *ngif="!showData">No Record Found</h5>
     
 </p-table>
 <!-- Add Modal -->
-<p-dialog header="Option" [(visible)]="visible" [style]="{width: '30vw'}">
+<p-dialog header="Option" [(visible)]="visible"  [modal]="true" [draggable]="false" [style]="{width: '30vw'}">
     <form [formGroup]="addForm">
         <div class="form-group">
             <label for="Label">Label</label>
@@ -60,7 +62,7 @@
     </form>
 </p-dialog>
 <!-- Update Modal -->
-<p-dialog header="Option" [(visible)]="isVisible" [style]="{width: '30vw'}">
+<p-dialog header="Option" [(visible)]="isVisible"  [modal]="true" [draggable]="false" [style]="{width: '30vw'}">
     <form [formGroup]="updateForm">
         <div class="form-group">
             <label for="label">Label</label>
@@ -82,16 +84,14 @@
     </form>
 </p-dialog>
 <!-- Delete PopUp -->
-<div class="card flex justify-content-center">
-    <p-confirmDialog #cd [style]="{width: '50vw'}">
-        <ng-template pTemplate="header">
-            <h3>Header Content</h3>
-        </ng-template>
-        <ng-template pTemplate="footer">
-            <button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
-            <button type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
-        </ng-template>
-    </p-confirmDialog>
-</div>
-
+<p-dialog  [(visible)]="isDelete"  [modal]="true" [draggable]="false" [style]="{width: '20vw'}">
+    <p style="font-size: large;font-weight: 700;">Delete-Option</p>
+    <div>
+        <p style="padding-top: 5px;">Do you want to Delete the Option?</p>
+        <div class="resetBtn" style="display: flex;flex-direction: row-reverse;font-family: serif;padding-top: 10px;">
+            <p-button label="Cancel" styleClass="p-button-danger"  (click)="cancel()"></p-button>&nbsp;
+            <p-button label="Delete" styleClass="p-button-warning"   (click)="deleteOption()"></p-button>
+        </div>
+    </div>
+</p-dialog>
 <p-toast></p-toast>

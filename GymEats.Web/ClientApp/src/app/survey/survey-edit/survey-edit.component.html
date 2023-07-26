@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card  text-center">
+           <div class="card-header d-flex">
+                <div class="col">
+                    <h5 style="font-family: sans-serif;color: darkolivegreen;">Update Survey</h5>
+                </div>
+                <div class="col">
+                    <button *ngIf="!showEdit" pButton pRipple label="Reset" type="submit"  class="p-button-primary"  style="float: right;right: 3rem;" (click)="Reset()"></button>
+                    <button *ngIf="!showEdit" pButton pRipple label="Edit" class="p-button-success"  style="float: right;right: 4rem;" (click)="editSurvey()" ></button>
+                    <button *ngIf="showEdit" pButton pRipple label="AddSurvey" class="p-button-primary"  style="float: right;right: 4rem;" (click)="Add()"></button>
+                </div>
+           </div>
+        <div class="card-body">
+            <div class="row">
+                     <app-question *ngIf="!showEdit"   [questionList]="questionList" [surveyQuestion]="SueveyToEdit" [disabled]="disabled"></app-question>
+                    <h1 style="color: rgb(125, 125, 240); text-align: center;" *ngIf="showEdit">No Survey Found</h1>
+           </div>
+        </div>
+         <div class="card-footer">
+          <button pButton pRipple label="cancel" *ngIf="!showEdit" class="p-button-danger"  style="float: right;right: 3rem;" [disabled]="disabled" (click)="Cancel()"></button>
+          <button pButton pRipple label="update" *ngIf="!showEdit" class="p-button-success"  style="float: right;right: 4rem;" (click)="addServey()" [disabled]="disabled"></button>
+        </div> 
+    </div>
+</div>
+<p-dialog [(visible)]="visible"  [modal]="true" [draggable]="false" [style]="{width: '20vw'}">
+    <p style="font-size: large;font-weight: 700;">Reset-Survey</p>
+    <div>
+        <p style="font-family: sans-serif;padding-top: 5px;">Do you want to Reset the Survey?</p>
+        <div class="resetBtn" style="display: flex;flex-direction: row-reverse;font-family: serif;padding-top: 10px;">
+            <p-button label="Cancel" styleClass="p-button-warning"  (click)="cancel()" ></p-button>&nbsp;
+            <p-button label="Reset" styleClass="p-button-danger"  (click)="resetSurvey()"></p-button>
+        </div>
+    </div>
+</p-dialog>
+<p-toast></p-toast>

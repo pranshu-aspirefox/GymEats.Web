@@ -1,40 +1,37 @@
-<div class="card flex justify-content-center">
-    <div class="accordion" id="accordion1">
 
-        <div class="accordion-item">
-            <div class="accordion-header" id="headingOne">
-            <button class="accordion-button justify-content-center" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
-                    <div class="col">
-                        <div class="d-flex">
-                            <div style="display: flex; align-items: center;">
-                             <h4>Option1.</h4>
+<div class="row mt-2">
+    <p-accordion class="w-full">
+        <p-accordionTab [selected]="questionOption.isOpen">
+            <ng-template pTemplate="header" >
+                <span class="text-black-30">Option{{optionNo}}</span>
+                <div class="delBtn" style="width: -webkit-fill-available;margin-right:3%">
+                    <p-button icon="pi pi-trash" 
+                        styleClass="p-button-rounded p-button-secondary p-button-text p-button-raised"
+                        (click)="deleteOption(optionNo)">
+                    </p-button>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+                <div class="col">
+                        <div class="d-flex m-3">
+                           <p-dropdown [options]="optionsList" [(ngModel)]="questionOption.id" optionLabel="label" optionValue="id" placeholder="select an option" [attr.is-invalid]="validateOption()" (onChange)="optionAdd($event)" [disabled]="disabled"></p-dropdown>&nbsp;&nbsp;
+                            <p-checkbox value=true  label="Is Exclusive" *ngIf="surveyQuestion.answerType == 2" [(ngModel)]="questionOption.isExclusive" (onChange)="toggleExclusive($event)" [disabled]="disabled"></p-checkbox>
+                    </div>
+                    <div class="questDietRadioBtnContainer m-3">
+                        <div class="d-flex" *ngIf="questionOption.id">
+                            <div class="justify-content-center ">
+                                <p-radioButton (click)="onChange($event)" [(ngModel)]="questionOption.question_Diet" [disabled]="disabled" 
+                                    label="Question" [value]="1"  [attr.is-valid]="validateOptionType()"  name="{{surveyQuestion.id}}-associatedWith-{{optionNo}}-{{surveyQuestion.sequenceNumber}}"></p-radioButton>&nbsp;
+                                <p-radioButton (click)="onChange($event)" [(ngModel)]="questionOption.question_Diet"  [disabled]="disabled"
+                                    label="Diet"[value]="2"  [attr.is-valid]="validateOptionType()" name="{{surveyQuestion.id}}-associatedWith-{{optionNo}}-{{questionOption.sequenceNumber}}"></p-radioButton>
                             </div>
                         </div>
                     </div>
-                </button> 
-                <button pButton style="float:right;position:relative;top:-50px;right:60px">kjdfg</button>
-            </div>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <form [formGroup]="option">
-                        <div class="d-flex ">
-                            <div class="col">
-                                <label for="label">Option.1</label>
-                                <input type="text" pInputText formControlName="label" />
-                            </div>
-                            <div class="col m-2">
-                                <p-checkbox formControlName="isExclusive" value="isExclusive"
-                                    inputId="isExclusive"></p-checkbox>&nbsp;
-                                <label for="isExclusive">Is Exclusive</label>
-                            </div>
-                        </div>
-                    </form>
+                    <app-question *ngIf="questionOption.question " [questionList]="questionList"
+                        [surveyQuestion]="questionOption.question" [disabled]="disabled"></app-question>
+                    <app-diet *ngIf="questionOption.diet" [diet]="questionOption.diet" [disabled]="disabled"></app-diet>
                 </div>
-            </div>
-        </div>
-
-    </div>
-
+            </ng-template>
+        </p-accordionTab>
+    </p-accordion>
 </div>

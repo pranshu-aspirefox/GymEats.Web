@@ -31,7 +31,7 @@
                 <a role="button" (click)="confirm($event,item.id)"><i class="pi pi-trash text-black-50"
                         style="font-size: 1.5rem"></i></a> -->
                     <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-success " (click)="openUpdateModal(item.id)"></p-button>
-                    <p-button icon="pi pi-trash" styleClass="p-button-rounded p-button-danger " (click)="confirm($event,item.id)"></p-button> 
+                    <p-button icon="pi pi-trash" styleClass="p-button-rounded p-button-danger "  (click)="confirm(item.id)"></p-button> 
             </td>
         </tr>
     </ng-template>
@@ -45,13 +45,15 @@
 </p-table>
 
 <!-- Add Modal -->
-<p-dialog header="Question" [(visible)]="visible" [style]="{width: '30vw'}">
+<p-dialog header="Question" [(visible)]="visible"  [modal]="true"  [draggable]="false" [style]="{width: '30vw'}">
     <form  [formGroup]="addForm" >
         <div class="form-group">
-            <label for="Label">Label</label>
-            <input type="text" formControlName="label" name="label" id="Label" class="form-control rounded-left"
+            <label for="label">Label</label>
+            <input type="text" formControlName="label" name="label" id="label" class="form-control rounded-left"
                 placeholder="Enter Label">
-           
+                <div class="text-danger error-message">
+                    <small  *ngIf="addForm.controls['label'].errors?.required && isSubmit">Please enter question.</small>
+                </div>
         </div>
         <div class="w-50 mb-2">
             <input type="checkbox" formControlName="isPrimary" checked="">&nbsp;
@@ -65,7 +67,7 @@
 </p-dialog> 
 
 <!-- Edit Modal  -->
-<p-dialog header="Question" [(visible)]="isVisible" [style]="{width: '30vw'}">
+<p-dialog header="Question" [(visible)]="isVisible"  [modal]="true"  [draggable]="false" [style]="{width: '30vw'}">
     <form  [formGroup]="updateForm">
         <div class="form-group">
             <label for="label">Label</label>
@@ -86,5 +88,15 @@
         </div>
     </form>
 </p-dialog> 
-
+<!-- DeleteModal -->
+<p-dialog  [(visible)]="isDelete"  [modal]="true" [draggable]="false" [style]="{width: '20vw'}">
+    <p style="font-size: large;font-weight: 700;">Delete-Question</p>
+    <div>
+        <p style="padding-top: 5px;">Do want to Delete the Question?</p>
+        <div class="resetBtn" style="display: flex;flex-direction: row-reverse;font-family: serif;padding-top: 10px;">
+            <p-button label="Cancel" styleClass="p-button-danger"  (click)="cancel()"></p-button>&nbsp;
+            <p-button label="Delete" styleClass="p-button-warning"   (click)="deleteQuestion()"></p-button>
+        </div>
+    </div>
+</p-dialog>
 <p-toast></p-toast>

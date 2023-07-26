@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SurveyComponent } from './survey/survey.component';
 import { DietComponent } from './survey-component/diet/diet.component';
 import { QuestionComponent } from './survey-component/question/question.component';
 import { OptionComponent } from './survey-component/option/option.component';
@@ -17,35 +16,47 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ToastModule } from 'primeng/toast';
+import { SurveyEditComponent } from './survey-edit/survey-edit.component';
+import { DialogModule } from 'primeng/dialog';
+import { BrowserModule } from '@angular/platform-browser';
 @NgModule({
   declarations: [
-    SurveyComponent,
-    DietComponent,
-   
+    DietComponent,  
     QuestionComponent,
     OptionComponent,
-    AddSurveyComponent
+    AddSurveyComponent,
+    SurveyEditComponent,
+  
   ],
   imports: [
     CommonModule,
     CardModule,
     CheckboxModule,
+    AccordionModule,
+    RadioButtonModule,
     TriStateCheckboxModule,
     FormsModule,
+    ReactiveFormsModule,
     InputTextModule,
-    
     ToolbarModule,
     DropdownModule ,
+    ToastModule,
     ReactiveFormsModule,
     TreeSelectModule,
     ButtonModule,
+    DialogModule,
     RadioButtonModule,
     RouterModule.forChild([
         {
           path:'addNewSurvey',
           component:AddSurveyComponent
-        },
+         },
         {
+          path:'editSurvey',
+          component:SurveyEditComponent
+         },
+         {
           path:'question',
           component:QuestionComponent
         },
@@ -53,8 +64,7 @@ import { CheckboxModule } from 'primeng/checkbox';
           path:'option',
           component:OptionComponent
         },
-        {
-          path:'diet',
+        {   path:'diet',
           component:DietComponent
         }
     ]),

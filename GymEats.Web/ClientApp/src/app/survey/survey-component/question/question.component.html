@@ -1,24 +1,26 @@
 <p-card>
-<div >
-       <label class="d-flex text-black">Select Your question :</label>     
-       <select class="form-select" aria-label="Default select example">
-        <option *ngFor="let que of questionList" [value]="que.id">{{que.label}}</option>
-      </select>
-     <div class="d-flex text-black">
-            <label fullWidth>Select the answer type:</label> 
-    </div>
-            <form  [formGroup]="formGroup" class="d-flex p-2 gap-2 m-2 text-black">
-                <div *ngFor="let category of options" >
-                    <p-radioButton [inputId]="category.key" [value]="category" formControlName="selectedCategory"></p-radioButton>
-                    <label [for]="category.key" class="ml-2">{{ category.name }}</label>
-                </div>
-               
-            </form>
-        <div class="quesTemo">
-            <div clas="option">
-             <!-- <app-option></app-option> -->
-            </div>
-       <p-button label="Add new option" class="d-flex" ></p-button> 
+    <div>
+        <label class="d-flex text-black mt-0">Select Your question :</label>
+        <p-dropdown [options]="questionList"  optionLabel="label" optionValue="id" placeholder="Select a question" [disabled]="disabled"
+        [(ngModel)]="surveyQuestion.id" class="m-2"  (onChange)="questionAdd($event)" [attr.is-select]="validateInput()"></p-dropdown>
+        <div class="d-flex text-black mt-2">
+            <label fullWidth>Select the answer type:</label>
         </div>
-</div>
+        <div class="ansTypeContainer">
+            <div class="d-flex mt-2">
+                <div class="justify-content-center " >
+                    <p-radioButton  [(ngModel)]="surveyQuestion.answerType" [value]="1" [disabled]="disabled"
+                        (click)="onChangeRadioBtn($event)" label="Single answer"  [attr.Radio-is-valid]="validateAnswerType()" (onClick)="onChangeRadioBtn($event)" name="{{surveyQuestion.id}}-answerType-{{surveyQuestion.sequenceNumber}}"></p-radioButton>&nbsp;
+                    <p-radioButton [(ngModel)]="surveyQuestion.answerType" [value]="2" [disabled]="disabled"
+                        (click)="onChangeRadioBtn($event)" label="Multi answer" [attr.Radio-is-valid]="validateAnswerType()" (onClick)="onChangeRadioBtn($event)" name="{{surveyQuestion.id}}-answerType-{{surveyQuestion.sequenceNumber}}"></p-radioButton>
+                </div>
+            </div>
+            <div class="quesTemo">
+                <div clas="option">
+                    <app-option *ngFor="let que of surveyQuestion.options; let i= index" [optionNo]="i+1" [surveyQuestion]="surveyQuestion" [questionList]="questionList" [questionOption]="que" (notValidEvent)="notValidSurvey($event)" [disabled]="disabled"></app-option>
+                </div>
+                <p-button icon="pi pi-plus" label="AddOption" styleClass="p-button-raised" *ngIf="surveyQuestion.answerType != undefined" (click)="addOptionComponent()" class="d-flex mt-2" [disabled]="disabled"></p-button>
+            </div>
+        </div>
+    </div>
 </p-card>
