@@ -1,0 +1,108 @@
+    <header>
+        
+        
+        <!-- Sidebar -->
+        <!-- Navbar -->
+        <nav id="main-navbar" style="background: white;"
+             class="navbar navbar-expand-lg navbar-light  fixed-top shadow-sm shadow-sm">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+                <!-- Toggle button -->
+                <!-- <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#sidebarMenu"
+                        aria-controls="sidebarMenu"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button> -->
+
+                <!-- Brand -->
+                <a role="button" class="navbar-brand d-inline-block" style="font-family: 'Source Sans Pro', sans-serif;" (click)="routeToDashboard()">
+                    <h3 id="brandName">Gym-Eats <i class="fa-solid fa-utensils fa-sm"></i></h3>
+                </a>
+                <!-- Search form -->
+                <form class="d-none d-md-flex input-group w-auto my-auto ms-3">
+                    <input autocomplete="off"
+                           type="search"
+                           class="form-control rounded"
+                           placeholder='Search (ctrl + "/" to focus)'
+                           style="min-width: 225px" />
+                    <span class="input-group-text border-0">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </form>
+
+                <!-- Right links -->
+                <ul class="navbar-nav ms-auto d-flex flex-row">
+                    <!-- Notification dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link me-3 me-lg-0 dropdown-bs-toggle hidden-arrow"
+                           href="#"
+                           id="navbarDropdownMenuLink"
+                           role="button"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            <i class="fas fa-bell"></i>
+                            <!--notification count-->
+                            <span class="badge rounded-pill badge-notification bg-danger"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end"
+                            aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Some news</a></li>
+                            <li><a class="dropdown-item" href="#">Another news</a></li>
+                            <li>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Avatar -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
+                           href="#"
+                           id="navbarDropdownMenuLink"
+                           role="button"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            <img src="https://png.pngtree.com/element_our/20190604/ourmid/pngtree-user-avatar-boy-image_1482937.jpg"
+                                 class="rounded-circle"
+                                 height="22"
+                                 alt=""
+                                 loading="lazy" />
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end"
+                            aria-labelledby="navbarDropdownMenuLink">
+                            <!-- <li><a class="dropdown-item" href="#">My profile</a></li> -->
+                            <li><a class="dropdown-item" (click)="changePassword()">Change Password</a></li>
+                            <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+    </header>
+    <!--Main Navigation-->
+
+    <!--Main layout-->
+    <main style="margin-top: 65px" class="pb-3">
+       <div class="row g-2">
+        <!-- Sidebar -->
+        <div class="col-md-1">
+            <p-menu [model]="items"></p-menu>
+        </div>
+        <!-- Sidebar -->
+
+        <div id="sidebarBodyComponent" class="col-md-10">
+            <!-- body -->
+            <router-outlet></router-outlet>
+        </div>
+       </div>
+    </main>
+
+   
+
+

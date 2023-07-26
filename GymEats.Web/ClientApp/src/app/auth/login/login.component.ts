@@ -22,8 +22,9 @@ export class LoginComponent implements OnInit {
   isfailed: boolean = false;
   isPasswordVisible: boolean = false;
   loginForm: FormGroup = new Object() as FormGroup;
+  role: string='';
 
-  constructor(private authServices: AuthService, private fb: FormBuilder, private messageService: MessageService) {
+  constructor(private authServices: AuthService, private fb: FormBuilder, private messageService: MessageService, private router: Router) {
 
   }
 
@@ -42,7 +43,6 @@ export class LoginComponent implements OnInit {
   }
 
   LogIn() {
-    debugger
     this.isfailed = false;
     this.isSubmitted = true
     if (this.loginForm.invalid) {
@@ -56,7 +56,15 @@ export class LoginComponent implements OnInit {
           const token = result.token.access_token;
           localStorage.setItem("jwt", token);
           console.log(this.authServices.getRole());
+          this.role = this.authServices.getRole();
+          if(this.role.toLocaleLowerCase() == 'admin')
+          {
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Login Successfull' });
+          (async () => { 
+            await new Promise<void>(resolve => setTimeout(()=>resolve(), 1000)).then(()=>this.router.navigate([''],));
+          })();
+          }
+          
         },
         error: (err) => {
           this.errorMessage = err.error.errorMessage;
@@ -64,6 +72,14 @@ export class LoginComponent implements OnInit {
         }
       })
     }
+  }
+
+  onPasswordShow(){
+    this.isPasswordVisible=true;
+  }
+
+  onPasswordHide(){
+    this.isPasswordVisible=false;
   }
 
 }

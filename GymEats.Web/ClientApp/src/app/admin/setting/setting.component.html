@@ -1,0 +1,34 @@
+
+<p-card header="Markup Setting" [style]="{ width: '360px' }">
+    <ng-template pTemplate="header">
+        <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+    </ng-template>
+    <hr/>
+    <p>
+        Markup Percent : {{markupPercent ?? 0}}%
+    </p>
+    <ng-template pTemplate="footer mt-1">
+        <p-button id="changeBtn" label="Change Markup" (click)="showDialogue()"></p-button>
+    </ng-template>
+</p-card>
+
+<!-- update markup modal -->
+<p-dialog header="Update Markup" [(visible)]="visible" [style]="{width: '30vw'}" [modal]="true">
+    <form [formGroup]="updateMarkup">
+        <div class="form-group">
+            <label for="value">Enter Markup Percent</label>
+            <input type="number" formControlName="value" name="value" id="value" class="form-control rounded-left w-50"
+                placeholder=""
+            >
+            <div class="text-danger error-message" >
+                <small  *ngIf="updateMarkup.controls['value'].errors?.required && isSubmit">Please enter markup percent.</small>
+                <small *ngIf=""></small>
+            </div>
+        </div>
+        
+        <div class="justify-content-center mt-2">
+            <button id="updateBtn" type="submit" class=" btn submit px-3" (click)="updateSetting()">Update</button>
+        </div>
+    </form>
+</p-dialog>
+<p-toast></p-toast>

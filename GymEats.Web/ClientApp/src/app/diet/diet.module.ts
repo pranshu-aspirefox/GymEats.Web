@@ -28,7 +28,7 @@ import { DropdownModule } from 'primeng/dropdown';
     ConfirmPopupModule,
     ToastModule,
     RouterModule.forChild([
-       {path:'getDietList',component:GetDietListComponent},
+       {path:'',component:GetDietListComponent},
       ])
   ]
 })

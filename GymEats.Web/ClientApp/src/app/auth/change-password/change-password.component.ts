@@ -25,6 +25,10 @@ export class ChangePasswordComponent {
   passwordValidator="^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$";
   EmailValidator = "^[a-zA-Z0-9-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
   errorMessage: any;
+  isPasswordVisible1: boolean=false;
+  isPasswordVisible2: boolean=false;
+  isPasswordVisible3: boolean=false;
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -74,6 +78,30 @@ export class ChangePasswordComponent {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: this.errorMessage ?? "Internal server error please try again." });
         }
       });
+  }
+
+  onPasswordShow1(){
+    this.isPasswordVisible1=true;
+  }
+
+  onPasswordHide1(){
+    this.isPasswordVisible1=false;
+  }
+
+  onPasswordShow2(){
+    this.isPasswordVisible2=true;
+  }
+
+  onPasswordHide2(){
+    this.isPasswordVisible2=false;
+  }
+
+  onPasswordShow3(){
+    this.isPasswordVisible3=true;
+  }
+
+  onPasswordHide3(){
+    this.isPasswordVisible3=false;
   }
 }
 

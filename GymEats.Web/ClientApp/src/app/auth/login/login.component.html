@@ -6,7 +6,8 @@
  <div class="row justify-content-center">
     <div class="col-md-7 col-lg-5">
         <div class="login-wrap p-4 p-md-5">
-            <h3 class="text-center mb-4 text-black-50">Login</h3>
+            <!-- <h3 class="text-center mb-4 text-black-50">Login</h3> -->
+            <h3 id="brandName" class="text-center mb-4">Gym-Eats <i class="fa-solid fa-utensils fa-sm"></i></h3>
             <form class="login-form" [formGroup]="loginForm" >
                 <div class="form-group" >
                 <input type="text" formControlName="email" name="email"  id="email" class="form-control rounded-left" placeholder="Username" >
@@ -16,19 +17,20 @@
                 </div>
                 </div>
                 <div class="form-group ">
-                    <input type="password" formControlName="password" class="form-control rounded-left" placeholder="Password" >
+                    <input type="password" #passwordInput formControlName="password" class="form-control rounded-left input-wrapper" placeholder="Password" >
+                    <span class="eye_button_style passwordEye"  (click)="passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password'"><i class="fa fa-eye-slash" (click)="onPasswordShow()" *ngIf="!isPasswordVisible"></i><i class="fa fa-eye" (click)="onPasswordHide()" *ngIf="isPasswordVisible"></i></span>
                     <div class="text-danger error-message">
                         <small  *ngIf="loginForm.controls['password'].errors && isSubmitted">Please enter valid password.</small>
                     </div>
                 </div>
                
                 <div class="w-50 mb-2">
-                    <label  class="checkbox-wrap checkbox-primary" for="rememberme">Remember Me
-                        <input type="checkbox" formControlName="rememberme" checked="">
+                    <label id="rememberLbl"  class="checkbox-wrap checkbox-primary" for="rememberme">Remember Me
+                        <input id="rememberCheck" type="checkbox" formControlName="rememberme" checked="">
                         </label>
                 </div>
                 <div class="form-group">
-                <button type="submit" class="form-control btn btn-primary rounded submit px-3" (click)="LogIn()">Login</button>
+                <button type="submit" id="submitBtn" class="form-control btn rounded submit px-3" (click)="LogIn()">Login</button>
                 </div>
                 <div class="form-group d-md-flex">
                   

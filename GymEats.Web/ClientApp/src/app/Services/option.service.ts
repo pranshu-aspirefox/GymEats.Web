@@ -29,12 +29,10 @@ export class OptionService {
     return this.http.post<AddNewOption>(`${this.apiUrl}/api/Option/AddOption`,data,{headers: this.headers})
   }
   getOptionById(id:string):Observable<any>{
-    debugger
     return this.http.get<UpdateOptionModal>(`${this.apiUrl}/api/Option/GetOptionById/${id}`,{headers:this.headers})
    }
   deleteOption(id:string):Observable<any>
   {
-    debugger
     return this.http.delete(`${this.apiUrl}/api/Option/DeleteOption/${id}`,{headers:this.headers})
   }
   updateOption(data:any):Observable<any>

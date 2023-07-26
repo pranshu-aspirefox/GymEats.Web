@@ -1,0 +1,30 @@
+:host ::ng-deep .p-menu{
+    padding-top: 15px;
+    height: 100%;
+    position: fixed;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+:host ::ng-deep .p-menuitem-icon{
+    color: #004c63;
+}
+
+#brandName{
+    background: linear-gradient( to right, #004c63 ,#567c88 );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+}
+
+:host ::ng-deep .p-menu .p-menuitem-link .p-menuitem-icon.menu-icon{
+    color: #004c63;
+}
+
+:host ::ng-deep .p-element .p-menuitem{
+    margin-top: 5px;
+}
+
+#sidebarBodyComponent{
+    padding: 10px;
+    margin: 1% 0 0 14%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+} 

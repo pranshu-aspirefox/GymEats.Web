@@ -21,7 +21,9 @@ export class SetNewPasswordComponent {
   passwordResetToken: string = '';
   passwordValidator="^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$";
   errorMessage:any='';
- 
+  isPasswordVisible1 : boolean=false;
+  isPasswordVisible : boolean=false;
+
 
   constructor(private authServices: AuthService,private router:Router, private fb: FormBuilder, private messageService: MessageService,private route: ActivatedRoute,) {
 
@@ -66,5 +68,20 @@ export class SetNewPasswordComponent {
     }
   });
       
+  }
+
+  onPasswordShow1(){
+    this.isPasswordVisible1=true;
+  }
+
+  onPasswordHide1(){
+    this.isPasswordVisible1=false;
+  }
+  onPasswordShow(){
+    this.isPasswordVisible=true;
+  }
+
+  onPasswordHide(){
+    this.isPasswordVisible=false;
   }
 }

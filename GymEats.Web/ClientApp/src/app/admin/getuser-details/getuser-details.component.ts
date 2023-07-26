@@ -8,14 +8,14 @@ import { UserDetails } from 'src/app/interfaces/UserDetails';
   styleUrls: ['./getuser-details.component.css']
 })
 export class GetuserDetailsComponent {
-  usersInfo!: UserDetails[];
+  allUsersInfo!: UserDetails[];
   errorMessage: any='';
   constructor(private userDetailsService: UserDetailsService){}
   ngOnInit() 
   {
     this.userDetailsService.getUserDetails().subscribe({
       next:(result)=>{
-        this.usersInfo = result.data;
+        this.allUsersInfo = result.data;
       },
       error:()=>{
         console.log("something went wrong.");

@@ -28,7 +28,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ConfirmPopupModule,
     ToastModule,
     RouterModule.forChild([
-    {path:'getOptions',component:GetOptionListComponent}
+    {path:'',component:GetOptionListComponent}
     ])
   ]
 })

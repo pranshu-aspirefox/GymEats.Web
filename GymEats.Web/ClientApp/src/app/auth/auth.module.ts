@@ -21,7 +21,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ToastModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-     
+      
       { path: 'reset', component: ResetPasswordComponent},
       {path:'login',component:LoginComponent},
       {path:'passwordChange',component:ChangePasswordComponent},
